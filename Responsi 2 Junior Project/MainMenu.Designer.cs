@@ -50,11 +50,12 @@
             // lblLogo
             // 
             lblLogo.AutoSize = true;
-            lblLogo.Location = new Point(112, 45);
+            lblLogo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLogo.Location = new Point(112, 30);
             lblLogo.Name = "lblLogo";
-            lblLogo.Size = new Size(34, 15);
+            lblLogo.Size = new Size(371, 30);
             lblLogo.TabIndex = 0;
-            lblLogo.Text = "Logo";
+            lblLogo.Text = "Human Resources Management App";
             // 
             // lblNama
             // 

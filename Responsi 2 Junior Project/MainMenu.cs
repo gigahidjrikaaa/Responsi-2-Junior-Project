@@ -12,6 +12,8 @@ namespace Responsi_2_Junior_Project
             StartPosition = FormStartPosition.CenterScreen;
 
             InitializeComponent();
+
+            MainMenu_Load(null, null);
         }
         private NpgsqlConnection conn;
         private NpgsqlCommand cmd;
