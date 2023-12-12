@@ -16,6 +16,7 @@ namespace Responsi_2_Junior_Project
         private NpgsqlConnection conn;
         private NpgsqlCommand cmd;
         private string sql;
+        public DataTable dt;
         private DataGridViewRow selectedRow;
         private string host = "localhost";
         private string port = "5433";
@@ -74,6 +75,22 @@ namespace Responsi_2_Junior_Project
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // datagridview cell click event
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = dataGridView1.SelectedRows[0];
+                MessageBox.Show(selectedRow.Cells[0].Value.ToString() + " Selected!");
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                return;
+            }
+            txtNama.Text = selectedRow.Cells[1].Value.ToString();
+            comboDep.Text = selectedRow.Cells[2].Value.ToString();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -150,6 +167,9 @@ namespace Responsi_2_Junior_Project
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            // Example SQL QUERY
+            // DELETE FROM public.Karyawan WHERE id_karyawan = 'KA1'
+
             try
             {
                 selectedRow = dataGridView1.SelectedRows[0];
@@ -164,7 +184,7 @@ namespace Responsi_2_Junior_Project
             try
             {
                 conn.Open();
-                NpgsqlCommand cmd = new NpgsqlCommand("DELETE FROM public.\"Departemen\" WHERE \"ID_Departemen\" = '" + selectedRow.Cells[0].Value.ToString() + "'", conn);
+                NpgsqlCommand cmd = new NpgsqlCommand("DELETE FROM public.Karyawan WHERE \"id_karyawan\" = '" + selectedRow.Cells[0].Value.ToString() + "'", conn);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Data Berhasil Dihapus");
                 conn.Close();
@@ -189,6 +209,7 @@ namespace Responsi_2_Junior_Project
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
                 dataGridView1.DataSource = ds.Tables[0];
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 conn.Close();
             }
             catch (NpgsqlException ex)
